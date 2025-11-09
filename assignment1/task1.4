@@ -1,0 +1,38 @@
+def factorial_recursive(n):
+    """Return n! computed using recursion.
+
+    - Base case: 0! and 1! are 1.
+    - Recursive case: n! = n * (n-1)!
+    """
+    if not isinstance(n, int) or n < 0:
+        raise ValueError("n must be a non-negative integer")
+    if n <= 1:
+        return 1
+    return n * factorial_recursive(n - 1)
+
+
+def factorial_iterative(n):
+    """Return n! computed using an iterative loop.
+
+    - Initialize result = 1
+    - Multiply result by each integer from 2 through n
+    """
+    if not isinstance(n, int) or n < 0:
+        raise ValueError("n must be a non-negative integer")
+    result = 1
+    for i in range(2, n + 1):
+        result *= i
+    return result
+if __name__ == "__main__":
+    n_str = input("Enter a non-negative integer: ")
+    try:
+        n = int(n_str)
+        if n < 0:
+            raise ValueError
+    except ValueError:
+        print("Invalid input")
+        raise SystemExit(1)
+    print("Recursive:", factorial_recursive(n))
+    print("Iterative:", factorial_iterative(n))
+
+
