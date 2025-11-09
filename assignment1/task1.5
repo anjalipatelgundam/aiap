@@ -1,0 +1,34 @@
+def find_largest(numbers):
+    if not numbers:
+        raise ValueError("numbers must be a non-empty list")
+
+    largest = numbers[0]
+    for value in numbers[1:]:
+        if value > largest:
+            largest = value
+    return largest
+def parse_numbers(user_input):
+    tokens = user_input.split()
+    if not tokens:
+        raise ValueError("no numbers provided")
+    try:
+        return [float(t) for t in tokens]
+    except ValueError as exc:
+        raise ValueError("all inputs must be numeric") from exc
+def main():
+    prompt = "Enter numbers separated by spaces: "
+    raw = input(prompt)
+    try:
+        numbers = parse_numbers(raw)
+        largest = find_largest(numbers)
+    except ValueError as err:
+        print(f"Input error: {err}")
+        return
+    if float(largest).is_integer():
+        print(int(largest))
+    else:
+        print(largest)
+if __name__ == "__main__":
+    main()
+
+
