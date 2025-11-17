@@ -1,0 +1,32 @@
+def discount(price, category):
+    """
+    Calculates the discounted price based on category and original price.
+
+    Args:
+        price (float or int): The original price of the item.
+        category (str): The category of the customer (e.g., 'student').
+
+    Returns:
+        float: The final price after applying the discount.
+    """
+    discount_percentage = 0.0
+
+    if category == "student":
+        if price > 1000:
+            discount_percentage = 0.10  # 10% discount for students over 1000
+        else:
+            discount_percentage = 0.05  # 5% discount for students 1000 or less
+    else:  # Non-student categories
+        if price > 2000:
+            discount_percentage = 0.15  # 15% discount for non-students over 2000
+        # Otherwise, discount_percentage remains 0.0 (no discount)
+
+    return price * (1 - discount_percentage)
+
+# --- Test Cases ---
+print(f"Student, Price 1200: {discount(1200, 'student')}") # Expected: 1200 * 0.9 = 1080.0
+print(f"Student, Price 800: {discount(800, 'student')}")   # Expected: 800 * 0.95 = 760.0
+print(f"Regular, Price 2500: {discount(2500, 'regular')}") # Expected: 2500 * 0.85 = 2125.0
+print(f"Regular, Price 1500: {discount(1500, 'regular')}") # Expected: 1500 * 1.0 = 1500.0
+print(f"Student, Price 1000: {discount(1000, 'student')}") # Expected: 1000 * 0.95 = 950.0 (<=1000 gets 5%)
+print(f"Regular, Price 2000: {discount(2000, 'regular')}") # Expected: 2000 * 1.0 = 2000.0 (<=2000 gets 0%)
