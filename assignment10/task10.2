@@ -1,0 +1,30 @@
+def find_common(a, b):
+    """
+    Finds common elements between two lists using set intersection.
+
+    Args:
+        a (list): The first list.
+        b (list): The second list.
+
+    Returns:
+        list: A list containing the common elements.
+    """
+    # Convert lists to sets, find their intersection, and convert back to a list
+    return list(set(a) & set(b))
+
+# --- Test Cases ---
+list1 = [1, 2, 3, 4, 5]
+list2 = [4, 5, 6, 7, 8]
+print(f"Common elements in {list1} and {list2}: {find_common(list1, list2)}") # Expected: [4, 5] (order might vary)
+
+list3 = ['apple', 'banana', 'orange']
+list4 = ['grape', 'banana', 'kiwi', 'apple']
+print(f"Common elements in {list3} and {list4}: {find_common(list3, list4)}") # Expected: ['apple', 'banana'] (order might vary)
+
+list5 = [1, 2, 2, 3]
+list6 = [2, 3, 3, 4]
+print(f"Common elements in {list5} and {list6}: {find_common(list5, list6)}") # Expected: [2, 3] (duplicates handled, order might vary)
+
+list7 = [10, 20]
+list8 = [30, 40]
+print(f"Common elements in {list7} and {list8}: {find_common(list7, list8)}")   # Expected: []
