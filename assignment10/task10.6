@@ -1,0 +1,29 @@
+def get_grade(score):
+    """
+    Determines the letter grade for a given score.
+
+    Args:
+        score (int): The numerical score.
+
+    Returns:
+        str: The corresponding letter grade (A, B, C, D, or F).
+    """
+    if score >= 90:
+        return "A"
+    elif score >= 80:
+        return "B"
+    elif score >= 70:
+        return "C"
+    elif score >= 60:
+        return "D"
+    else:
+        return "F"
+
+# --- Test Cases ---
+print(f"Score 95: {get_grade(95)}") # Expected: A
+print(f"Score 82: {get_grade(82)}") # Expected: B
+print(f"Score 70: {get_grade(70)}") # Expected: C
+print(f"Score 65: {get_grade(65)}") # Expected: D
+print(f"Score 58: {get_grade(58)}") # Expected: F
+print(f"Score 100: {get_grade(100)}") # Expected: A
+print(f"Score 0: {get_grade(0)}")   # Expected: F
