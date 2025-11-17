@@ -1,0 +1,22 @@
+def divide_numbers(numerator, denominator):
+    """
+    Divides two numbers and handles potential ZeroDivisionError.
+
+    Args:
+        numerator (int or float): The number to be divided.
+        denominator (int or float): The number to divide by.
+
+    Returns:
+        float or str: The result of the division if successful, or
+                      an error message string if division by zero occurs.
+    """
+    try:
+        return numerator / denominator
+    except ZeroDivisionError:
+        return "Error: Cannot divide by zero."
+
+# --- Test Cases ---
+print(f"10 / 2 = {divide_numbers(10, 2)}")
+print(f"10 / 0 = {divide_numbers(10, 0)}")
+print(f"5.5 / 1.1 = {divide_numbers(5.5, 1.1)}")
+print(f"0 / 7 = {divide_numbers(0, 7)}")
