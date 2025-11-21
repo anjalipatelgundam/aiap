@@ -1,3 +1,9 @@
-s = input("Enter numbers separated by spaces (press Enter for 1..10): ").strip()
-nums = map(int, s.split()) if s else range(1, 11)
-print([n*n for n in nums])
+class Student:
+    def __init__(self, name, age, marks):
+        self.name, self.age, self.marks = name, age, marks
+    def total(self):
+        return sum(self.marks)
+    def report(self):
+        print(f"{self.name}, {self.age} | {self.marks} | Total: {self.total()} | Avg: {self.total()/len(self.marks):.2f}")
+
+[Student(input("Name: "), int(input("Age: ")), [float(input(f"M{i+1}: ")) for i in range(3)]).report()]
