@@ -1,0 +1,44 @@
+import requests
+import json
+
+def get_weather_with_error_handling(city_name, api_key):
+    base_url = "http://api.openweathermap.org/data/2.5/weather?"
+    complete_url = f"{base_url}appid={api_key}&q={city_name}"
+
+    try:
+        response = requests.get(complete_url, timeout=10)  # Add a timeout for network calls
+        response.raise_for_status()  # Raise an exception for HTTP errors (4xx or 5xx)
+        weather_data = response.json()
+
+        # Check for API-specific error messages (e.g., invalid city, wrong API key)
+        if weather_data.get('cod') == '401' or weather_data.get('cod') == 401:
+            print("Error: Could not connect to API. Check your API key.")
+            return
+        elif weather_data.get('cod') == '404' or weather_data.get('cod') == 404:
+            print(f"Error: City not found: {city_name}. Please check the city name.")
+            return
+        elif weather_data.get('cod') and int(weather_data.get('cod')) >= 400:
+            print(f"Error: {weather_data.get('message', 'An API error occurred.')}")
+            return
+
+        # Display the response in a readable (pretty JSON) format
+        print(json.dumps(weather_data, indent=4))
+
+    except requests.exceptions.Timeout:
+        print("Error: Could not connect to API. Network timeout occurred.")
+    except requests.exceptions.ConnectionError:
+        print("Error: Could not connect to API. Check your network connection.")
+    except requests.exceptions.RequestException as e:
+        # This will catch other requests-related errors, including HTTPError from raise_for_status()
+        print(f"Error: Could not connect to API. Check your API key or network connection. Details: {e}")
+    except json.JSONDecodeError:
+        print("Error: Failed to decode JSON response from API. Invalid response format.")
+    except Exception as e:
+        # Catch any other unexpected errors
+        print(f"An unexpected error occurred: {e}")
+
+# --- How to use --- 
+# Replace 'YOUR_API_KEY' with your actual OpenWeatherMap API key
+# api_key = 'YOUR_API_KEY'
+# city = input("Enter city name: ")
+# get_weather_with_error_handling(city, api_key)
